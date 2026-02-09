@@ -16,3 +16,7 @@ if st.button("Submit"):
     else:
         finalSpecies = favSpecies
 
+birds = st.selectbox(
+    "Are penguins birds?",
+    ["Yes", "No", "Not sure"]
+)
