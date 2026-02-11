@@ -218,17 +218,22 @@ elif st.session_state.step == 16:
         st.rerun()
 
 # Instructions
-
 elif st.session_state.step == 17:
     st.write("For the next question, please make sure to turn your volume up as an audio will be played.")
 
     if st.button("Next"):
-        st.session_state.amIAPenguin = amIAPenguin
         st.session_state.step = 18
         st.rerun()
 
 # Q17
 elif st.session_state.step == 18:
+
+    # audio
+    audio_file = open("C:\Users\lgjul\OneDrive\VD 26\earnedit.mp3", "rb")
+    audio_bytes = audio_file.read()
+
+    st.audio(audio_bytes, format="audio/mp3")
+
     valentine = st.selectbox(
         "Will you be Liam Mananghaya's valentine?",
         ["Yes", "No"]
@@ -247,6 +252,3 @@ elif st.session_state.step == 19:
     st.write("What are birds classified as?", st.session_state.classification)
     st.write("What do penguins primarily eat?", st.session_state.food)
     st.write("Do all penguins live in warm climates?", st.session_state.climate)
-
-
-
