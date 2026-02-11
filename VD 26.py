@@ -1,6 +1,25 @@
 import streamlit as st
 import base64
 
+def addbg(image_file):
+    with open(image_file, "rb") as f:
+        encoded = base64.b64encode(f.read()).decode()
+
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/png;base64,{encoded}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
 st.title("Annual UMMBGB Survey")
 
 if "step" not in st.session_state: 
@@ -246,6 +265,8 @@ elif st.session_state.step == 18:
         unsafe_allow_html=True
     )
 
+    addbg("penguin1.png")
+
     valentine = st.selectbox(
         "Will you be Liam Mananghaya's valentine?",
         ["Yes", "No"]
@@ -264,5 +285,3 @@ elif st.session_state.step == 19:
     st.write("What are birds classified as?", st.session_state.classification)
     st.write("What do penguins primarily eat?", st.session_state.food)
     st.write("Do all penguins live in warm climates?", st.session_state.climate)
-
-
