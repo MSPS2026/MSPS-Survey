@@ -1,6 +1,14 @@
 import streamlit as st
 import base64
 
+def answer_yes():
+    st.session_state.curr_img = "penguinhappy.jpg"
+    st.session_state.answered = True
+
+def answer_no():
+    st.session_state.curr_img = "penguinangry.jpg"
+    st.session_state.answered = True
+
 st.title("Annual UMMBGB Survey")
 
 if "step" not in st.session_state: 
@@ -246,23 +254,21 @@ elif st.session_state.step == 18:
         unsafe_allow_html=True
     )
 
-    # Initialize session state for current image
     if "curr_img" not in st.session_state:
         st.session_state.curr_img = "penguin1.png"
+    if "answered" not in st.session_state:
+        st.session_state.answered = False
 
-# Show the current image, centered
+    # Show current image, centered
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         st.image(st.session_state.curr_img, width=400)
 
-    st.write("Will you be Liam Mananghaya's valentine?")
-
-    if st.button("Yes"):
-        st.session_state.curr_img = "penguinhappy.jpg"
-
-    if st.button("No"):
-        st.session_state.curr_img = "penguinangry.jpg"
-        st.write("Think again.")
+    # Only show question if not answered
+    if not st.session_state.answered:
+        st.write("Will you be Liam Mananghaya's valentine?")
+        st.button("Yes", on_click=answer_yes)
+        st.button("No", on_click=answer_no)
 
     if st.button("Next"):
         st.session_state.valentine = valentine
@@ -277,6 +283,7 @@ elif st.session_state.step == 19:
     st.write("What are birds classified as?", st.session_state.classification)
     st.write("What do penguins primarily eat?", st.session_state.food)
     st.write("Do all penguins live in warm climates?", st.session_state.climate)
+
 
 
 
