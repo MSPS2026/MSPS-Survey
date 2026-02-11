@@ -253,7 +253,7 @@ elif st.session_state.step == 18:
 # Show the current image, centered
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.image(st.session_state.penguin, width=400)
+        st.image(st.session_state.curr_img, width=400)
 
     st.write("Will you be Liam Mananghaya's valentine?")
 
@@ -277,6 +277,7 @@ elif st.session_state.step == 19:
     st.write("What are birds classified as?", st.session_state.classification)
     st.write("What do penguins primarily eat?", st.session_state.food)
     st.write("Do all penguins live in warm climates?", st.session_state.climate)
+
 
 
 
