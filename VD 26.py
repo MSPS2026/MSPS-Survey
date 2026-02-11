@@ -254,22 +254,35 @@ elif st.session_state.step == 18:
         unsafe_allow_html=True
     )
 
+    # Initialize session state
     if "curr_img" not in st.session_state:
         st.session_state.curr_img = "penguin1.png"
-    if "answered" not in st.session_state:
-        st.session_state.answered = False
+    if "message" not in st.session_state:
+        st.session_state.message = ""  # empty at first
+
+    # Functions to update the image and message
+    def answer_yes():
+        st.session_state.curr_img = "penguinhappy.jpg"
+        st.session_state.message = "YAYAYAYAYYAYAYAYAYYAYAYAYAYYAYYYAY"
+
+    def answer_no():
+        st.session_state.curr_img = "penguinangry.jpg"
+        st.session_state.message = "Think again."
 
     # Show current image, centered
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         st.image(st.session_state.curr_img, width=400)
 
-    # Only show question if not answered
-    if not st.session_state.answered:
-        st.write("Will you be Liam Mananghaya's valentine?")
-        st.button("Yes", on_click=answer_yes)
-        st.button("No", on_click=answer_no)
+    # Always show the question
+    st.write("Will you be Liam Mananghaya's valentine?")
+    st.button("Yes", on_click=answer_yes)
+    st.button("No", on_click=answer_no)
 
+    # Show message if it exists
+    if st.session_state.message:
+        st.write(st.session_state.message)
+        
     if st.button("Next"):
         st.session_state.valentine = valentine
         st.session_state.step = 19
@@ -283,6 +296,7 @@ elif st.session_state.step == 19:
     st.write("What are birds classified as?", st.session_state.classification)
     st.write("What do penguins primarily eat?", st.session_state.food)
     st.write("Do all penguins live in warm climates?", st.session_state.climate)
+
 
 
 
